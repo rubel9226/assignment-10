@@ -1,11 +1,13 @@
 "use client";
 
+import { useSession } from "@/lib/auth-client";
 // import { Menu, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { BiMenu, BiSearch } from "react-icons/bi";
 
 export default function Navbar() {
+  const session = useSession();
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl border-b border-white/10 bg-slate-950/70">
       <div className="container mx-auto h-16 px-4 flex items-center justify-between">
