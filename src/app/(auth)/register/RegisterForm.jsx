@@ -1,33 +1,55 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useFormState } from 'react-dom';
+import { signUp } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react'; 
 import {
   FaGoogle,
   FaEye,
   FaEyeSlash,
   FaBookOpen,
 } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
-const RegisterForm = () => {
-       
+const RegisterForm = () => {  
     const [showPassword, setShowPassword] = useState(false);
+    const router = useRouter();
 
-    const [loading, setLoading] = useFormState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleRegister = async (e) => {
         e.preventDefault();
 
+        const form = e.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const image = form.image.value;
+        const password = form.password.value;
+
+
+        console.log({name, email, image, password});
+
+
         setLoading(true);
+        try { 
+            const res = await signUp.email({
+                name: name,
+                email: email,
+                password: password,
+                image: image
+            });
+            console.log(res);
 
-        try {
-        // Better Auth Register Logic
-
-        console.log("Register Success");
+            if (!res.error) {
+                router.push("/");
+                router.refresh();
+            } else {
+                toast.error(res.error.message);
+            }
         } catch (error) {
-        console.log(error);
+            console.log(error);
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     };
     return (
@@ -42,21 +64,22 @@ const RegisterForm = () => {
                     <div>
                     <input
                         type="text"
+                        name='name'
                         placeholder="Full Name"
                         required
                         className="w-full h-14 px-4 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-500 outline-none"
                     />
                     </div>
 
-                    {/* Email */}
-
+                    {/* Email */} 
                     <div>
-                    <input
-                        type="email"
-                        placeholder="Email Address"
-                        required
-                        className="w-full h-14 px-4 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-500 outline-none"
-                    />
+                        <input
+                            type="email"
+                            name='email'
+                            placeholder="Email Address"
+                            required
+                            className="w-full h-14 px-4 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-500 outline-none"
+                        />
                     </div>
 
                     {/* Photo URL */}
@@ -64,6 +87,7 @@ const RegisterForm = () => {
                     <div>
                     <input
                         type="url"
+                        name='image'
                         placeholder="Photo URL"
                         required
                         className="w-full h-14 px-4 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-500 outline-none"
@@ -75,11 +99,8 @@ const RegisterForm = () => {
                     <div className="relative">
 
                     <input
-                        type={
-                        showPassword
-                            ? "text"
-                            : "password"
-                        }
+                        type={ showPassword ? "text" : "password" }
+                        name='password'
                         placeholder="Password"
                         required
                         className="w-full h-14 px-4 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-500 outline-none"

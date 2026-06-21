@@ -1,5 +1,5 @@
-import Link from "next/link";
-import LoginForm from "./loginForm";
+import Link from "next/link"; 
+import RegisterForm from "./RegisterForm";
 
 
 
