@@ -29,16 +29,20 @@ export default function LessonCard({ lesson, token, allLessons, setAllLessons })
       console.log(error?.response?.data?.message);
     }
   }
+
+  const lessonImage = lesson?.image || 'image';
+  const userImage = lesson?.creatorPhoto || 'image';
+
   
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-indigo-500/40 transition-all">
 
       {/* Cover */}
-      { lesson?.image?.startsWith("http") &&
+      { lessonImage.startsWith("http") &&
         <div className="relative">
           <div className='h-52'>
             {
-              lesson?.image?.startsWith("http") && 
+              lessonImage.startsWith("http") && 
                 <Image 
                   src={lesson?.image}
                   alt={lesson?.title ||  'lesson image'}
@@ -84,7 +88,7 @@ export default function LessonCard({ lesson, token, allLessons, setAllLessons })
         {/* Creator */}
         <div className="flex items-center gap-3 mb-4">
           {
-            lesson?.creatorPhoto?.startsWith("http") && 
+            userImage.startsWith("http") && 
             <Image
               src={ lesson?.creatorPhoto }
               alt={lesson.creatorName}

@@ -109,7 +109,7 @@ export default function Navbar() {
 
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu bg-base-100 rounded-box z-[100] w-64 p-2 shadow-lg border"
+                  className="dropdown-content menu bg-base-100 rounded-box z-1000 w-64 p-2 shadow-lg border "
                 >
                   <li className="pointer-events-none border-b pb-2 mb-2">
                     <div className="flex flex-col text-center">
