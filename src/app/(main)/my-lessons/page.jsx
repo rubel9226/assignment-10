@@ -5,8 +5,8 @@ import { useUser } from "@/Components/layout/AuthContext";
 import { api } from "@/lib/baseAPI";
 
 
-import MyLessonTable from "./components/MyLessonTable";
 import Link from "next/link";
+import MyLessonTableDeskMobile from "./Components/MyLessonTableDeskMobile";
 
 export default function MyLessonsPage() {
   const { user, token } = useUser();
@@ -56,7 +56,7 @@ export default function MyLessonsPage() {
           </Link>
         </div>
       ) : (
-        <MyLessonTable lessons={lessons} setLessons={setLessons} />
+        <MyLessonTableDeskMobile lessons={lessons} setLessons={setLessons} />
       )}
     </div>
   );

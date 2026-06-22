@@ -4,7 +4,7 @@ import { FaBookmark, FaHeart } from "react-icons/fa";
 import LessonRow from "./LessonRow";
 import { BiMessage } from "react-icons/bi";
 
-export default function MyLessonTable({ lessons, setLessons }) {
+export default function MyLessonTableDeskMobile({ lessons, setLessons }) {
   return (
     <>
       {/* Desktop Table */}
