@@ -1,6 +1,6 @@
 import FavoriteRow from "./FavoriteRow";
 
-export default function FavoritesTable({
+export default function FavoritesCardTable({
   lessons,
   reload,
 }) {

@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { api } from "@/lib/baseAPI";
 import FavoritesFilters from "./components/FavoritesFilters";
-import FavoritesTable from "./components/FavoritesTable";
 import { useUser } from "@/Components/layout/AuthContext";
+import FavoritesCardTable from "./Components/FavoritesCardTable";
 
 export default function MyFavoritesPage() {
   const [lessons, setLessons] = useState([]);
@@ -54,7 +54,7 @@ export default function MyFavoritesPage() {
         setTone={setTone}
       />
 
-      <FavoritesTable
+      <FavoritesCardTable
         lessons={filteredLessons}
         reload={loadFavorites}
       />
