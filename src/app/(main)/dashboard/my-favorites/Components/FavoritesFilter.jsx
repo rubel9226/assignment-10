@@ -1,4 +1,4 @@
-export default function FavoritesFilters({
+export default function FavoritesFilter({
   category,
   setCategory,
   tone,

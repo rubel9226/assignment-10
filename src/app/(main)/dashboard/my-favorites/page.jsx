@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { api } from "@/lib/baseAPI";
-import FavoritesFilters from "./components/FavoritesFilters";
 import { useUser } from "@/Components/layout/AuthContext";
 import FavoritesCardTable from "./Components/FavoritesCardTable";
+import FavoritesFilter from "./Components/FavoritesFilter";
 
 export default function MyFavoritesPage() {
   const [lessons, setLessons] = useState([]);
@@ -47,7 +47,7 @@ export default function MyFavoritesPage() {
 
   return (
     <div className="space-y-6 container mx-auto mt-4 min-h-[50vh]">
-      <FavoritesFilters
+      <FavoritesFilter
         category={category}
         setCategory={setCategory}
         tone={tone}
