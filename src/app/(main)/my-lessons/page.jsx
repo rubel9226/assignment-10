@@ -6,7 +6,7 @@ import { api } from "@/lib/baseAPI";
 
 
 import MyLessonTable from "./components/MyLessonTable";
-import EmptyLessons from "./components/EmptyLessons";
+import Link from "next/link";
 
 export default function MyLessonsPage() {
   const { user, token } = useUser();
@@ -48,7 +48,13 @@ export default function MyLessonsPage() {
         </div>
         : 
       lessons.length === 0 ? (
-        <EmptyLessons />
+        <div className="text-center p-10">
+          <h2 className="text-2xl font-bold">No lessons found</h2>
+
+          <Link href="/dashboard/add-lesson" className="btn btn-primary mt-5">
+            Create Lesson
+          </Link>
+        </div>
       ) : (
         <MyLessonTable lessons={lessons} setLessons={setLessons} />
       )}
