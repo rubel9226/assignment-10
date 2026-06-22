@@ -1,0 +1,57 @@
+"use client";
+
+import { useEffect, useState } from "react"; 
+import { useUser } from "@/Components/layout/AuthContext";
+import { api } from "@/lib/baseAPI";
+
+
+import MyLessonTable from "./components/MyLessonTable";
+import EmptyLessons from "./components/EmptyLessons";
+
+export default function MyLessonsPage() {
+  const { user, token } = useUser();
+
+  const [lessons, setLessons] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const getMyLessons = async () => {
+    try {
+      setLoading(true);
+
+      const res = await api.get("/lessons/my-lessons", {
+        headers: {
+          Authorization: token,
+        },
+      });
+
+      setLessons(res?.data?.payload || []);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      getMyLessons();
+    }
+  }, [token]); 
+
+  return (
+    <div className="container mx-auto p-5">
+      <h1 className="text-4xl font-bold mb-8">My Lessons</h1>
+
+      {loading ? 
+        <div className="flex justify-center mt-20">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+        : 
+      lessons.length === 0 ? (
+        <EmptyLessons />
+      ) : (
+        <MyLessonTable lessons={lessons} setLessons={setLessons} />
+      )}
+    </div>
+  );
+}

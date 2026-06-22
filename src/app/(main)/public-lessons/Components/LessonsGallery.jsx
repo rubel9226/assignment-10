@@ -55,16 +55,19 @@ export default function LessonsGallery() {
 
     const handleGetAllLessons = async (page = 1) => {
         try {
+            console.log(token)
             setLoading(true);
             const res = await api.get(`/lessons/all-lessons?page=${page}&limit=12&sort=${filter.sort}&accessLevel=${filter.accessLevel}&emotionalTone=${filter.emotionalTone}&category=${filter.category}`, {
                 headers: {
                     Authorization: `${token}`, 
                 }
             });
+            console.log(res);
             setAllLessons(res?.data?.payload?.lessons);
             setPagination(res?.data?.payload?.pagination);
         } catch (error) {
             console.log(error);
+            console.log(error?.response?.data);
         } finally{
             setLoading(false);
         }
@@ -105,12 +108,12 @@ export default function LessonsGallery() {
                 <section className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8 items-center">
                     {allLessons.map((lesson) =>
                     user?.isPremium ?  (
-                        <LessonCard key={lesson.id} lesson={lesson} token={token} allLessons={allLessons} setAllLessons={setAllLessons} /> 
+                        <LessonCard key={lesson.id} user={user} lesson={lesson} token={token} allLessons={allLessons} setAllLessons={setAllLessons} /> 
                     ) :
                     lesson.accessLevel === 'Premium' ? (
-                        <PremiumLessonCard key={lesson.id} />
+                        <PremiumLessonCard />
                     ) : (
-                        <LessonCard key={lesson.id} lesson={lesson} token={token} allLessons={allLessons} setAllLessons={setAllLessons} />
+                        <LessonCard user={user} lesson={lesson} token={token} allLessons={allLessons} setAllLessons={setAllLessons} />
                     )
                     )}
                 </section> 

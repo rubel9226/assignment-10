@@ -1,14 +1,16 @@
 import { api } from "@/lib/baseAPI";
 import { likeLesson } from "@/lib/LikeLesson";
 import Image from "next/image";
+import Link from "next/link";
 import {
   BiHeart,
   BiMessage,
   BiShow,
   BiCrown,
 } from "react-icons/bi";
+import { FaHeart } from "react-icons/fa";
 
-export default function LessonCard({ lesson, token, allLessons, setAllLessons }) {
+export default function LessonCard({ user, lesson, token, allLessons, setAllLessons }) {
 
   const handleLike =async (id) => {
     console.log({id, token})
@@ -17,12 +19,29 @@ export default function LessonCard({ lesson, token, allLessons, setAllLessons })
             `/lessons/like-lesson/${id}`,
             {},
             {
-                headers: {
+              headers: {
                 Authorization: token,
-                },
+              },
             }
         );
-        console.log(res?.data);
+        console.log(res?.data?.payload);
+        const { likesCount, isLiked } = res?.data?.payload;
+
+        setAllLessons((prev) =>
+          prev.map((lesson) =>
+            lesson._id === id
+              ? {
+                  ...lesson,
+                  likesCount,
+                  likes: isLiked
+                    ? [...(lesson.likes || []), user.id]
+                    : lesson.likes?.filter(
+                        (likeId) => likeId !== user.id
+                      ),
+                }
+              : lesson
+          )
+        );
         console.log(allLessons);
     } catch (error) {
       console.log(error);
@@ -33,13 +52,13 @@ export default function LessonCard({ lesson, token, allLessons, setAllLessons })
   const lessonImage = lesson?.image || 'image';
   const userImage = lesson?.creatorPhoto || 'image';
 
-  
+
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-indigo-500/40 transition-all">
+    <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-indigo-500/40 transition-all ">
 
       {/* Cover */}
       { lessonImage.startsWith("http") &&
-        <div className="relative">
+        <Link href={`/lessons-details/${lesson._id}`} className="relative cursor-pointer">
           <div className='h-52'>
             {
               lessonImage.startsWith("http") && 
@@ -61,32 +80,34 @@ export default function LessonCard({ lesson, token, allLessons, setAllLessons })
               Premium  
             </div>
           )}
-        </div>
+        </Link>
       }
 
       {/* Content */}
-      <div className="p-5"> 
+      <div className="p-5 pb-0"> 
 
-        <div className="flex justify-between items-center mb-3">
-          <span className="text-xs bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full">
-            {lesson.category} 
-          </span>
+        <Link href={`/lessons-details/${lesson._id}`} className=' cursor-pointer'>
+          <div className="flex justify-between items-center mb-3">
+            <span className="text-xs bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full">
+              {lesson.category} 
+            </span>
 
-          <span className="text-xs text-slate-400">
-            {lesson.emotionalTone}
-          </span>
-        </div>
+            <span className="text-xs text-slate-400">
+              {lesson.emotionalTone}
+            </span>
+          </div>
 
-        <h3 className="text-xl font-semibold mb-2 line-clamp-2">
-          {lesson.title}
-        </h3>
+          <h3 className="text-xl font-semibold mb-2 line-clamp-2">
+            {lesson.title}
+          </h3>
 
-        <p className="text-slate-400 text-sm line-clamp-3 mb-4">
-          {lesson.description}
-        </p>
+          <p className="text-slate-400 text-sm line-clamp-3 mb-4">
+            {lesson.description}
+          </p>
 
-        {/* Creator */}
-        <div className="flex items-center gap-3 mb-4">
+          {/* Creator */}
+          <div className='flex items-center justify-between mb-4'>
+            <div className="flex items-center gap-3">
           {
             userImage.startsWith("http") && 
             <Image
@@ -99,7 +120,7 @@ export default function LessonCard({ lesson, token, allLessons, setAllLessons })
           }
 
           <div>
-            <p className="text-sm font-medium">
+            <p className="text-sm font-medium capitalize">
               {lesson.creatorName}
               
             </p>
@@ -110,13 +131,22 @@ export default function LessonCard({ lesson, token, allLessons, setAllLessons })
               ).toLocaleDateString()}
             </p>
           </div>
-        </div>
+            </div>
+              
+          </div>
+
+        </Link>
 
         {/* Stats */}
-        <div className="border-t border-slate-700 pt-4 flex items-center justify-between text-slate-400">
+        <div className="border-t border-slate-700 pt- flex items-center justify-between text-slate-400">
 
-          <div onClick={() => handleLike(lesson._id)} className="flex items-center gap-1">
-            <BiHeart />
+          <div onClick={() => handleLike(lesson._id)} className="flex items-center gap-1 px-5 pb-5 
+          pt-4">
+            {
+              lesson.likes?.includes(user?.id) ? 
+              <FaHeart className="fill-red-500" /> : 
+                <BiHeart />
+            }
             {lesson.likesCount}
           </div>
 

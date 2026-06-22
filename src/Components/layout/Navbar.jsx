@@ -123,7 +123,7 @@ export default function Navbar() {
                   </li>
 
                   <li>
-                    <Link href="/profile" className="">
+                    <Link href="/dashboard/profile" className="">
                       Profile
                     </Link>
                   </li>
