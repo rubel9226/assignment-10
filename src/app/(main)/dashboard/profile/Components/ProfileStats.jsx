@@ -3,21 +3,7 @@
 import { useEffect, useState } from "react";
 import { api } from "@/lib/baseAPI";
 
-export default function ProfileStats() {
-  const [stats, setStats] = useState({});
-
-  useEffect(() => {
-    loadStats();
-  }, []);
-
-  const loadStats = async () => {
-    try {
-      const res = await api.get("/users/profile-stats");
-      setStats(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export default function ProfileStats({stats}) {
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

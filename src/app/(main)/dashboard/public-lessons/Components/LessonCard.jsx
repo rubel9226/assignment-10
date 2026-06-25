@@ -58,7 +58,7 @@ export default function LessonCard({ user, lesson, token, allLessons, setAllLess
 
       {/* Cover */}
       { lessonImage.startsWith("http") &&
-        <Link href={`/lessons-details/${lesson._id}`} className="relative cursor-pointer">
+        <Link href={`/dashboard/lessons-details/${lesson._id}`} className="relative cursor-pointer">
           <div className='h-52'>
             {
               lessonImage.startsWith("http") && 
@@ -86,7 +86,7 @@ export default function LessonCard({ user, lesson, token, allLessons, setAllLess
       {/* Content */}
       <div className="p-5 pb-0"> 
 
-        <Link href={`/lessons-details/${lesson._id}`} className=' cursor-pointer'>
+        <Link href={`/dashboard/lessons-details/${lesson._id}`} className=' cursor-pointer'>
           <div className="flex justify-between items-center mb-3">
             <span className="text-xs bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full">
               {lesson.category} 

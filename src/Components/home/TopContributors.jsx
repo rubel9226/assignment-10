@@ -27,9 +27,9 @@ const contributors = [
   },
 ];
 
-export default function TopContributors() {
+export default function TopContributors({contributors}) {
   return (
-    <section className="py-24">
+    <section className="py-24 text-center">
       <div className="container mx-auto px-4">
 
         <div className="bg-slate-900 border border-white/10 rounded-[32px] p-10">
@@ -44,10 +44,6 @@ export default function TopContributors() {
               <p className="text-slate-400 mt-4">
                 The voices making the biggest impact this week.
               </p>
-
-              <button className="mt-6 px-6 py-3 bg-indigo-600 rounded-xl">
-                View Leaderboard
-              </button>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -59,19 +55,19 @@ export default function TopContributors() {
                 >
                   <div className="relative w-24 h-24 mx-auto">
                     <Image
-                      src={user.image}
-                      alt={user.name}
+                      src={user?.creatorImage}
+                      alt={'Image'}
                       fill
                       className="rounded-full object-cover border-4 border-indigo-500"
                     />
                   </div>
 
                   <h4 className="mt-4 font-semibold">
-                    {user.name}
+                    {user?.creatorName}
                   </h4>
 
                   <p className="text-indigo-400 text-sm">
-                    {user.lessons} Lessons
+                    {user?.totalLessons} Lessons
                   </p>
                 </div>
               ))}

@@ -1,62 +1,50 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { api } from "@/lib/baseAPI";
 import { useUser } from "@/Components/layout/AuthContext";
 import FavoritesCardTable from "./Components/FavoritesCardTable";
 import FavoritesFilter from "./Components/FavoritesFilter";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-export default function MyFavoritesPage() {
-  const [lessons, setLessons] = useState([]);
-  const [category, setCategory] = useState("");
-  const [tone, setTone] = useState("");
+export default async function MyFavoritesPage() {
 
-  const {token} = useUser();
+  // useEffect(() => {
+  //   loadFavorites();
+  // }, []);
 
-  useEffect(() => {
-    loadFavorites();
-  }, []);
+  // const loadFavorites = async () => {
+  //   try {
+  //     const res = await api.get(`/users/favorite-lessons?category=${category}&tone=${tone}`, {
+  //       headers: {
+  //           Authorization: token,
+  //       }
+  //     });
 
-  const loadFavorites = async () => {
-    try {
-      const res = await api.get(`/users/favorite-lessons?category=${category}&tone=${tone}`, {
-        headers: {
-            Authorization: token,
-        }
-      });
+  //     setLessons(res.data?.payload);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-      setLessons(res.data?.payload);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  const filteredLessons = lessons.filter(
-    (lesson) => {
-      const categoryMatch =
-        !category ||
-        lesson.category === category;
+  let lessons = [];
 
-      const toneMatch =
-        !tone ||
-        lesson.emotionalTone === tone;
-
-      return categoryMatch && toneMatch;
-    }
-  );
-
+  try {
+    const token = await auth.api.getToken({
+        headers: await headers ()
+    });
+    const res = await api.get(`/users/favorite-lessons`, {
+      headers: {
+          Authorization: token.token,
+      }
+    }); 
+    lessons = res?.data?.payload;
+  } catch (error) {
+    console.log(error); 
+  }
   return (
     <div className="space-y-6 container mx-auto mt-4 min-h-[50vh]">
-      <FavoritesFilter
-        category={category}
-        setCategory={setCategory}
-        tone={tone}
-        setTone={setTone}
-      />
-
       <FavoritesCardTable
-        lessons={filteredLessons}
-        reload={loadFavorites}
+        lessons={lessons} 
       />
     </div>
   );

@@ -4,7 +4,7 @@ import { createContext, useContext } from "react";
 
 const AuthContext = createContext(null);
 
-export const AuthProvider = ({ children, user, token }) => {
+export const AuthProvider = ({ children, user, token='' }) => {
 
   const data = {
     user, 

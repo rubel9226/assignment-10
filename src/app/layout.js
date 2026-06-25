@@ -26,14 +26,20 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-  const user = session?.user;
-  
-  const token = await auth.api.getToken({
-      headers: await headers ()
-  }); 
+  let user = {}
+  let token = {}
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+    user = session?.user; 
+    
+    token = await auth.api.getToken({
+        headers: await headers ()
+    });     
+  } catch (error) {
+    console.log("Auth Error: ", error);
+  }
 
 
   return (

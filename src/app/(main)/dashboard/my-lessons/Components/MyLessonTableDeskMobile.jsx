@@ -78,7 +78,7 @@ export default function MyLessonTableDeskMobile({ lessons, setLessons }) {
 
             <div className="flex gap-2 mt-5 flex-wrap">
               <a
-                href={`/lessons-details/${lesson._id}`}
+                href={`/dashboard/lessons-details/${lesson._id}`}
                 className="btn btn-sm btn-primary"
               >
                 Details

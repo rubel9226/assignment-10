@@ -4,27 +4,27 @@ import { useEffect, useState } from "react";
 import { api } from "@/lib/baseAPI";
 import { useUser } from "@/Components/layout/AuthContext";
 
-export default function RecentLessons() {
-  const [lessons, setLessons] = useState([]);
-  const {token} = useUser();
+export default function RecentLessons({lessons}) {
+  // const [lessons, setLessons] = useState([]);
+  // const {token} = useUser();
 
-  useEffect(() => {
-    loadLessons();
-  }, []);
+  // useEffect(() => {
+  //   loadLessons();
+  // }, []);
 
-  const loadLessons = async () => {
-    try {
-      const res = await api.get( "/lessons/recent-lessons", {
-        headers: {
-          Authorization: token
-        }
-      });
+  // const loadLessons = async () => {
+  //   try {
+  //     const res = await api.get( "/lessons/recent-lessons", {
+  //       headers: {
+  //         Authorization: token
+  //       }
+  //     });
 
-      setLessons(res?.data?.payload);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     setLessons(res?.data?.payload);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div className="bg-base-100 rounded-2xl shadow p-6">

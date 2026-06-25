@@ -14,7 +14,7 @@ export default function QuickActions() {
 
       <div className="grid md:grid-cols-3 gap-4">
         <Link
-          href="/add-lessons"
+          href="/dashboard/add-lessons"
           className="btn btn-primary h-20"
         >
           <BiPlusCircle size={24} />
@@ -22,7 +22,7 @@ export default function QuickActions() {
         </Link>
 
         <Link
-          href="/my-lessons"
+          href="/dashboard/my-lessons"
           className="btn btn-outline h-20"
         >
           <BiBookContent size={24} />

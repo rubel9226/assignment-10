@@ -53,7 +53,7 @@ export default function SimilarLessons({ lessonId }) {
               </p>
 
               <Link
-                href={`/lessons/${item._id}`}
+                href={`/dashboard/lessons-details/${item._id}`}
                 className="btn btn-primary btn-sm mt-4"
               >
                 See Details

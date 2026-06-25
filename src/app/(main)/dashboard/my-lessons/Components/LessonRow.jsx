@@ -7,9 +7,11 @@ import { useUser } from "@/Components/layout/AuthContext";
 import { api } from "@/lib/baseAPI";
 import { BiMessage } from "react-icons/bi";
 import { FaBookmark, FaHeart } from "react-icons/fa"; 
+import { useRouter } from "next/navigation";
 
 export default function LessonRow({ lesson, lessons, setLessons }) {
   const { token } = useUser();
+  const router = useRouter()
 
 
   const handleDelete = async () => {
@@ -34,7 +36,7 @@ export default function LessonRow({ lesson, lessons, setLessons }) {
           },
       );
 
-      setLessons((prev) => prev.filter((item) => item._id !== lesson._id));
+      router.refresh();
 
       Swal.fire("Deleted!", "", "success"); 
     } catch (error) {
@@ -80,7 +82,7 @@ export default function LessonRow({ lesson, lessons, setLessons }) {
 
       <td>
         <div className="flex gap-2">
-          <Link href={`/lessons-details/${lesson._id}`} className="btn btn-xs">
+          <Link href={`/dashboard/lessons-details/${lesson._id}`} className="btn btn-xs">
             Details
           </Link>
 

@@ -7,26 +7,25 @@ import WhyLifeMatters from "@/Components/home/WhyLifeMatters";
 import Navbar from "@/Components/layout/Navbar";
 import Image from "next/image";
 import { authClient } from "@/lib/auth-client";
+import { api } from "@/lib/baseAPI";
 
 export default async function Home() {
-
-  const { data, error } = await authClient.token()
-  if (error) {
+  let contributors = {};
+  try {  
+    const contributorsRes = await api.get('/admins/top-contributors');
+    contributors = contributorsRes?.data?.payload;
+  } catch (error) {
     console.log(error);
   }
-  if (data) {
-    const jwtToken = data.token
-    consol.log(jwtToken);
 
-    // Use this token for authenticated requests to external services
-  }
+  console.log(contributors, 'contributors');
   return (
       <main>
         <HeroSection />
         <StatsSection />
         <FeaturedLessons />
         <WhyLifeMatters />
-        <TopContributors />
+        <TopContributors contributors={contributors} />
         <CTASection />
       </main>
   );

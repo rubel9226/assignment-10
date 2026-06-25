@@ -27,38 +27,7 @@ export default function Navbar() {
   }
    
   return (
-    <header className="max-lg:collapse sticky top-0 z-50 backdrop-blur-xl border-b border-white/10 bg-slate-950/70">
-      <input id="navbar-1-toggle" className="peer hidden" type="checkbox" />
-  <div className="collapse-content lg:hidden z-1">
-    <ul className="menu w-full space-y-1"> 
-      
-      <li className=''>
-        <Link href="/" className={` ${pathname === '/' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>Home</Link>
-      </li>
-      <li>
-        <Link href="/add-lessons"  className={` ${pathname === '/add-lessons' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>Add Lessons</Link>
-      </li>
-      <li>
-        <Link href="/my-lessons"  className={` ${pathname === '/my-lessons' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>My Lessons</Link>
-      </li>
-      <li>
-        <Link href="/public-lessons"  className={` ${pathname === '/public-lessons' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>Public Lessons</Link>
-      </li> 
-        {user && !user?.isPremium && (
-          <li>
-            <Link
-              href="/pricing"
-              className={` ${pathname === '/pricing' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}
-            >
-              Upgrade
-            </Link> 
-          </li>
-        )}    
-    </ul>
-  </div>      
-
-
-
+    <header className="sticky top-0 z-50 backdrop-blur-xl border-b border-white/10 bg-slate-950/70">
       <div className="container mx-auto h-16 px-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           
@@ -75,19 +44,18 @@ export default function Navbar() {
 
         <nav className="hidden lg:flex gap-6">
           <Link href="/" className={` ${pathname === '/' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>Home</Link>
-          <Link href="/add-lessons"  className={` ${pathname === '/add-lessons' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>Add Lessons</Link>
-          <Link href="/my-lessons"  className={` ${pathname === '/my-lessons' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>My Lessons</Link>
-          <Link href="/public-lessons"  className={` ${pathname === '/public-lessons' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>Public Lessons</Link>
+          <Link href="/dashboard/add-lessons"  className={` ${pathname === '/dashboard/add-lessons' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>Add Lessons</Link>
+          <Link href="/dashboard/my-lessons"  className={` ${pathname === '/dashboard/my-lessons' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>My Lessons</Link>
+          <Link href="/dashboard/public-lessons"  className={` ${pathname === '/dashboard/public-lessons' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>Public Lessons</Link>
           {user && !user?.isPremium && (
             <Link
-              href="/pricing"
-               className={` ${pathname === '/pricing' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}
+              href="/dashboard/pricing"
+               className={` ${pathname === '/dashboard/pricing' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}
             >
               Upgrade
             </Link>
           )} 
-        </nav>
-
+        </nav> 
         {
           user ? (
             <div className="flex items-center gap-3">
@@ -95,16 +63,21 @@ export default function Navbar() {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="cursor-pointer rounded-full"
+                  className="cursor-pointer rounded-full w-9 aspect-square bg-indigo-700 text-center content-center"
                 >
-                  <Image
-                    src={user?.image || 'https://thumbs.dreamstime.com/z/default-profile-picture-icon-high-resolution-high-resolution-default-profile-picture-icon-symbolizing-no-display-picture-360167031.jpg' }
-                    alt="profile"
-                    width={36}
-                    height={36}
-                    className="rounded-full aspect-square"
-                    unoptimized
-                  />
+                  {
+                    user?.image
+                    ? 
+                    <Image
+                      src={user?.image || 'https://thumbs.dreamstime.com/z/default-profile-picture-icon-high-resolution-high-resolution-default-profile-picture-icon-symbolizing-no-display-picture-360167031.jpg' }
+                      alt="profile"
+                      width={36}
+                      height={36}
+                      className="rounded-full aspect-square"
+                      unoptimized
+                    />
+                    :<span className="text-lg">{user?.name[0]}</span> 
+                  }
                 </div>
 
                 <ul
@@ -161,7 +134,40 @@ export default function Navbar() {
             </div>
           )
         } 
-      </div> 
+      </div>
+
+
+        <div className='max-lg:collapse '>
+        <input id="navbar-1-toggle" className="peer hidden" type="checkbox" />
+        <div className="collapse-content lg:hidden z-1">
+          <ul className="menu w-full space-y-1"> 
+            
+            <li className=''>
+              <Link href="/" className={` ${pathname === '/' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>Home</Link>
+            </li>
+            <li>
+              <Link href="/dashboard/add-lessons"  className={` ${pathname === '/dashboard/add-lessons' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>Add Lessons</Link>
+            </li>
+            <li>
+              <Link href="/dashboard/my-lessons"  className={` ${pathname === '/dashboard/my-lessons' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>My Lessons</Link>
+            </li>
+            <li>
+              <Link href="/dashboard/public-lessons"  className={` ${pathname === '/dashboard/public-lessons' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>Public Lessons</Link>
+            </li> 
+              {user && !user?.isPremium && (
+                <li>
+                  <Link
+                    href="/dashboard/pricing"
+                    className={` ${pathname === '/dashboard/pricing' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}
+                  >
+                    Upgrade
+                  </Link> 
+                </li>
+              )}    
+          </ul>
+        </div>      
+      </div>
+
     </header>
   );
 }

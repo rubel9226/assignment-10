@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useUser } from "@/Components/layout/AuthContext";
 import { api } from "@/lib/baseAPI";
 import Swal from "sweetalert2";
+// import { auth } from "@/lib/auth";
+import { authClient } from "@/lib/auth-client";
+// import { headers } from "next/headers";
 
 export default function EditProfileForm() {
   const { user } = useUser();
@@ -17,10 +20,10 @@ export default function EditProfileForm() {
     e.preventDefault();
 
     try {
-      await api.patch(
-        `/users/update-profile/${user._id}`,
-        formData
-      );
+      await authClient.updateUser({
+        name: formData.name,
+        image: formData.image,
+      });
 
       Swal.fire({
         icon: "success",
@@ -30,6 +33,9 @@ export default function EditProfileForm() {
       console.log(error);
     }
   };
+
+  const disabled = formData?.name === user?.name && formData?.image === user?.image ;
+  console.log(disabled);
 
   return (
     <div className="bg-base-100 shadow rounded-2xl p-6">
@@ -67,7 +73,7 @@ export default function EditProfileForm() {
           }
         />
 
-        <button className="btn btn-primary">
+        <button disabled={disabled} className="btn btn-primary">
           Update Profile
         </button>
       </form>

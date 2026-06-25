@@ -5,32 +5,32 @@ import { useUser } from "@/Components/layout/AuthContext";
 import { api } from "@/lib/baseAPI";
 import Link from "next/link";
 
-export default function UserLessons() {
+export default function UserLessons({lessons}) {
   const { user, token } = useUser();
 
 
-  const [lessons, setLessons] = useState([]);
+  // const [lessons, setLessons] = useState([]);
 
-  useEffect(() => {
-    if (user?.id) {
-      loadLessons();
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user?.id) {
+  //     loadLessons();
+  //   }
+  // }, [user]);
 
-  const loadLessons = async () => {
-    try {
-      const res = await api.get( `/users/my-public-lessons`, {
-            headers: {
-                Authorization: token, 
-            }
-        }
-      );
+  // const loadLessons = async () => {
+  //   try {
+  //     const res = await api.get( `/users/my-public-lessons`, {
+  //           headers: {
+  //               Authorization: token, 
+  //           }
+  //       }
+  //     );
 
-      setLessons(res?.data?.payload);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     setLessons(res?.data?.payload);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div className="mb-10">
@@ -62,7 +62,7 @@ export default function UserLessons() {
               <p>{lesson.emotionalTone}</p>
 
               <Link
-                href={`/lessons-details/${lesson._id}`}
+                href={`/dashboard/lessons-details/${lesson._id}`}
                 className="btn btn-primary"
               >
                 View Details

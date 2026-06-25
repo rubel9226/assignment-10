@@ -1,9 +1,4 @@
-export default function FavoritesFilter({
-  category,
-  setCategory,
-  tone,
-  setTone,
-}) {
+export default function FavoritesFilter({ category, setCategory, tone, setTone, handleRemove}) {
   return (
     <div className="bg-base-100 p-5 rounded-2xl shadow grid grid-cols-2 gap-4">
       <select

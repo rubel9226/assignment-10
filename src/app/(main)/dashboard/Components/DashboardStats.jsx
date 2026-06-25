@@ -5,29 +5,7 @@ import { api } from "@/lib/baseAPI";
 import { useEffect, useState } from "react";
 import { BiBook, BiHeart, BiBookmark, BiTrendingUp, } from "react-icons/bi";
 
-export default function DashboardStats() {
-  const [stats, setStats] = useState({});
-  const { token} = useUser();
-
-
-  const handleGetStats = async () => {
-    try {
-      const res = await api.get('/users/stats', {
-        headers: {
-          Authorization: token,
-        }
-      });
-      setStats(res?.data?.payload);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  console.log(stats);
-
-  useEffect(() => {
-    handleGetStats();
-  }, [])
-
+export default function DashboardStats({stats}) {
   const cards = [
     {
       title: "Lessons",

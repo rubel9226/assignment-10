@@ -85,7 +85,7 @@ export default function CreateLessonForm() {
         });
         setStep(1);
         router.refresh();
-        router.push('/my-lessons')
+        router.push('/dashboard/my-lessons')
         
       } catch (error) {
         toast.error('Invalid! Try again!')

@@ -18,9 +18,7 @@ async function getLesson(id) {
 export default async function LessonDetails({ params }) {
   const query = await params;
   const data = await getLesson(query.id);
-  const lesson = data.payload;
-
-  
+  const lesson = data.payload;   
 
   return (
     <div className="container mx-auto flex flex-col md:flex-row gap-6 p-5">

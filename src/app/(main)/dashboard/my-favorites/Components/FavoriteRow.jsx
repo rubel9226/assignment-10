@@ -1,41 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Swal from "sweetalert2";
-import { api } from "@/lib/baseAPI";
+import { useRouter } from "next/navigation";
 
-export default function FavoriteRow({
-  lesson,
-  reload,
-}) {
-  const handleRemove = async () => {
-    const result =
-      await Swal.fire({
-        title:
-          "Remove from favorites?",
-        icon: "warning",
-        showCancelButton: true,
-      });
-
-    if (!result.isConfirmed) return;
-
-    try {
-      await api.patch(
-        `/lessons/remove-favorite/${lesson._id}`
-      );
-
-      Swal.fire({
-        icon: "success",
-        title: "Removed",
-        timer: 1200,
-        showConfirmButton: false,
-      });
-
-      reload();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export default function FavoriteRow({ lesson, handleRemove }) {
+  
 
   return (
     <tr>
@@ -74,14 +43,14 @@ export default function FavoriteRow({
       <td>
         <div className="flex gap-2">
           <Link
-            href={`/lessons/${lesson._id}`}
+            href={`/dashboard/lessons-details/${lesson._id}`}
             className="btn btn-sm btn-primary"
           >
             Details
           </Link>
 
           <button
-            onClick={handleRemove}
+            onClick={() =>handleRemove(lesson._id)}
             className="btn btn-sm btn-error"
           >
             Remove

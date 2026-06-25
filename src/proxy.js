@@ -12,13 +12,12 @@ export async function proxy(request) {
         return NextResponse.redirect(new URL('/', request.url))
     }
 
-  
 }
  
 export const config = {
-  matcher: [
-    '/login',
-    '/register'
-],
+    matcher: [
+        '/login',
+        '/register'
+    ],
 
 }
