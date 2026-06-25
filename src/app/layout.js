@@ -50,7 +50,9 @@ export default async function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         <AuthProvider user={user} token={token.token}  >
           <Navbar />
-          {children}
+            <main className="px-4 md:px-0">
+               {children}
+            </main>
           <Footer />
         </AuthProvider>
         <ToastContainer />

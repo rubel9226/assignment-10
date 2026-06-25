@@ -11,19 +11,22 @@ import { api } from "@/lib/baseAPI";
 
 export default async function Home() {
   let contributors = [];
+  let featuredLessons = [];
   try {  
     const contributorsRes = await api.get('/admins/top-contributors');
+    const featuredRes = await api.get('/lessons/featured-lessons');
     contributors = contributorsRes?.data?.payload;
+    featuredLessons = featuredRes?.data?.payload;
   } catch (error) {
     console.log(error);
   }
 
-  console.log(contributors, 'contributors');
+  console.log(featuredLessons, 'contributors');
   return (
       <main>
         <HeroSection />
         <StatsSection />
-        <FeaturedLessons />
+        <FeaturedLessons lessons={featuredLessons} />
         <WhyLifeMatters />
         <TopContributors contributors={contributors} />
         <CTASection />

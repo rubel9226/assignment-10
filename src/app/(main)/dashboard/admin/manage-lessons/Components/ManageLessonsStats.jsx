@@ -2,21 +2,22 @@ import { FaBookOpen } from "react-icons/fa6";
 import { IoEye } from "react-icons/io5";
 import { FaFlag } from "react-icons/fa";
 
-export default function ManageLessonsStats() {
+export default function ManageLessonsStats({lessonsStats}) {
+  console.log(lessonsStats, 'lessons stats');
   const stats = [
     {
       title: "Public Lessons",
-      value: 120,
+      value: lessonsStats?.totalPublicLessons,
       icon: <FaBookOpen size={22} />,
     },
     {
       title: "Private Lessons",
-      value: 35,
+      value: lessonsStats?.totalPrivateLessons,
       icon: <IoEye size={22} />,
     },
     {
       title: "Reported Content",
-      value: 12,
+      value: lessonsStats?.totalReports,
       icon: <FaFlag size={22} />,
     },
   ];

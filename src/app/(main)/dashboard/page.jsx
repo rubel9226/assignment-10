@@ -31,7 +31,7 @@ export default async function DashboardHome() {
     } 
     console.log(lessons)
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 container mx-auto mt-4 md:mt-8">
       <WelcomeBanner />
       <DashboardStats stats={stats} />
       <QuickActions />

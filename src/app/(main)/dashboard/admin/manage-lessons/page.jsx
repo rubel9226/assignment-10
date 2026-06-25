@@ -9,24 +9,23 @@ import { api } from "@/lib/baseAPI";
 
 export default async function ManageLessonsPage() {
   let token = '';
-  let lessons = [];
-  let category = '';
+  let lessonsStats = {};
   try {
     token = await auth.api.getToken({
         headers: await headers ()
     });
-    const lessonsRes = await api.get('/lessons/all-lessons', {
+    const res = await api.get('/admins/lessons-stats', {
       headers: {
         Authorization: token?.token
       }
     });
-    lessons = lessonsRes?.data?.payload;
+    lessonsStats = res?.data?.payload
+
   } catch (error) {
     console.log(error);
   } 
-  console.log(lessons);
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 container mx-auto  mt-2 md:mt-8">
       <div>
         <h1 className="text-3xl font-bold">Manage Lessons</h1>
         <p className="text-base-content/70 mt-1">
@@ -34,9 +33,9 @@ export default async function ManageLessonsPage() {
         </p>
       </div>
 
-      <ManageLessonsStats /> 
+      <ManageLessonsStats lessonsStats={lessonsStats} /> 
 
-      <ManageLessonsTable token={token} lessons={lessons} />
+      <ManageLessonsTable token={token} />
     </div>
   );
 }
