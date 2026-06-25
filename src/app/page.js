@@ -10,7 +10,7 @@ import { authClient } from "@/lib/auth-client";
 import { api } from "@/lib/baseAPI";
 
 export default async function Home() {
-  let contributors = {};
+  let contributors = [];
   try {  
     const contributorsRes = await api.get('/admins/top-contributors');
     contributors = contributorsRes?.data?.payload;

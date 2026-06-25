@@ -9,7 +9,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
 export default async function MyLessonsPage() { 
-    let lessons = {};
+    let lessons = [];
     try {
         const token = await auth.api.getToken({
             headers: await headers ()

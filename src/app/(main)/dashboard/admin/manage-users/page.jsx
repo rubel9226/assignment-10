@@ -7,19 +7,20 @@ import { api } from "@/lib/baseAPI";
 export default async function ManageUsersPage() {
     let usersStats = {}; 
     let users = [];
+    let token = {}
     try {
-        const token = await auth.api.getToken({
+        token = await auth.api.getToken({
             headers: await headers ()
         });
         const statsRes = await api.get('/admins/admins-stats', {
             headers: {
-                Authorization: token.token,
+                Authorization: token?.token,
             }
         });
         
         const userRes = await api.get('/admins/users', {
             headers: {
-                Authorization: token.token,
+                Authorization: token?.token,
             }
         });
         
@@ -29,13 +30,13 @@ export default async function ManageUsersPage() {
         console.log(error);
     }
 
-    console.log(usersStats);
+    console.log(usersStats, 'user state');
 
     return (
         <div className="space-y-6 container mx-auto min-h-[50vh] mt-4 md:mt-8">
             <UsersStats usersStats={usersStats} />
 
-            <UsersTable users={users} />
+            <UsersTable users={users} token={token} />
         </div>
     );
 }

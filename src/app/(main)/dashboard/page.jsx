@@ -9,7 +9,7 @@ import { headers } from "next/headers";
 
 export default async function DashboardHome() { 
     let stats = {};
-    let lessons = {};
+    let lessons = [];
     try {
         const token = await auth.api.getToken({
             headers: await headers ()
@@ -25,10 +25,11 @@ export default async function DashboardHome() {
            }
          });
         stats = res?.data?.payload;
-        lessons = (resLessons?.data?.payload);
+        lessons = resLessons?.data?.payload;
     } catch (error) {
       console.log(error);  
     } 
+    console.log(lessons)
   return (
     <div className="space-y-8">
       <WelcomeBanner />

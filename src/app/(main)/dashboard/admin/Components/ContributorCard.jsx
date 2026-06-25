@@ -13,8 +13,7 @@ export default function ContributorCard({
               alt=""
               className="rounded-full"
             />
-            :
-            user?.creatorName[0]
+            :''
           }
         </div>
 

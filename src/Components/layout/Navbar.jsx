@@ -76,7 +76,8 @@ export default function Navbar() {
                       className="rounded-full aspect-square"
                       unoptimized
                     />
-                    :<span className="text-lg">{user?.name[0]}</span> 
+                    :""
+                    // :<span className="text-lg">{user?.name[0] || ''}</span> 
                   }
                 </div>
 

@@ -106,7 +106,7 @@ export default function LessonsGallery() {
                 )
                 :
                 <section className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8 items-center">
-                    {allLessons.map((lesson) =>
+                    {(Array.isArray(allLessons) ? allLessons : []).map((lesson) =>
                     user?.isPremium ?  (
                         <LessonCard key={lesson.id} user={user} lesson={lesson} token={token} allLessons={allLessons} setAllLessons={setAllLessons} /> 
                     ) :

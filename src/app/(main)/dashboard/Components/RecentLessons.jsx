@@ -1,30 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { api } from "@/lib/baseAPI";
-import { useUser } from "@/Components/layout/AuthContext";
-
-export default function RecentLessons({lessons}) {
-  // const [lessons, setLessons] = useState([]);
-  // const {token} = useUser();
-
-  // useEffect(() => {
-  //   loadLessons();
-  // }, []);
-
-  // const loadLessons = async () => {
-  //   try {
-  //     const res = await api.get( "/lessons/recent-lessons", {
-  //       headers: {
-  //         Authorization: token
-  //       }
-  //     });
-
-  //     setLessons(res?.data?.payload);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+export default function lessons({lessons=[]}) {
 
   return (
     <div className="bg-base-100 rounded-2xl shadow p-6">
@@ -33,7 +9,7 @@ export default function RecentLessons({lessons}) {
       </h2>
 
       <div className="space-y-4">
-        {lessons.map((lesson) => (
+        {(Array.isArray(lessons) ? lessons : []).map((lesson) => (
           <div
             key={lesson._id}
             className="border rounded-xl p-4"

@@ -10,7 +10,7 @@ import { headers } from "next/headers";
 
 export default async function AdminDashboardHome() {
   let adminStats = {};
-  let contributors = {};
+  let contributors = [];
   let userGrowth = [];
   let lessonGrowth = [];
   try {

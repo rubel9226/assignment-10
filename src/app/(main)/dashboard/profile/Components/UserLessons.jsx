@@ -6,31 +6,7 @@ import { api } from "@/lib/baseAPI";
 import Link from "next/link";
 
 export default function UserLessons({lessons}) {
-  const { user, token } = useUser();
-
-
-  // const [lessons, setLessons] = useState([]);
-
-  // useEffect(() => {
-  //   if (user?.id) {
-  //     loadLessons();
-  //   }
-  // }, [user]);
-
-  // const loadLessons = async () => {
-  //   try {
-  //     const res = await api.get( `/users/my-public-lessons`, {
-  //           headers: {
-  //               Authorization: token, 
-  //           }
-  //       }
-  //     );
-
-  //     setLessons(res?.data?.payload);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const { user, token } = useUser(); 
 
   return (
     <div className="mb-10">
