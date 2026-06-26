@@ -36,7 +36,7 @@ export default function ManageLessonsTable({token}) {
   const handleGetAllLessons = async (page) => {
     setLoadingLessons(true);
     try {
-      const res = await api.get(`/admins/all-lessons?page=${page}&limit=12&sort=${filter.sort}&category=${filter.category}`, {
+      const res = await api.get(`/admins/all-lessons?page=${page}&limit=8&sort=${filter.sort}&category=${filter.category}`, {
         headers: {
           Authorization: token?.token
         }
@@ -460,15 +460,12 @@ export default function ManageLessonsTable({token}) {
   ))}
 </div>
 
-      {
-        lessons.length > 12 
-        ?
+      { 
         <Pagination
             pagination={pagination}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
-        />
-        :"" 
+        /> 
       }
 
     </>

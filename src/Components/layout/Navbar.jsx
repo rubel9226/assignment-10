@@ -49,8 +49,8 @@ export default function Navbar() {
           <Link href="/dashboard/public-lessons"  className={` ${pathname === '/dashboard/public-lessons' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}>Public Lessons</Link>
           {user && !user?.isPremium && (
             <Link
-              href="/dashboard/pricing"
-               className={` ${pathname === '/dashboard/pricing' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}
+              href="/dashboard/plans/pricing"
+               className={` ${pathname === '/dashboard/plans/pricing' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}
             >
               Upgrade
             </Link>
@@ -158,8 +158,8 @@ export default function Navbar() {
               {user && !user?.isPremium && (
                 <li>
                   <Link
-                    href="/dashboard/pricing"
-                    className={` ${pathname === '/dashboard/pricing' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}
+                    href="/dashboard/plans/pricing"
+                    className={` ${pathname === '/dashboard/plans/pricing' ? "text-indigo-400 border-b-2 border-indigo-400" : "hover:text-indigo-300" }`}
                   >
                     Upgrade
                   </Link> 

@@ -1,6 +1,6 @@
 import { BiSearch } from "react-icons/bi";
 
-export default function SearchSection() {
+export default function SearchSection({setSearch}) {
   return (
     <section className="space-y-5">
       <div className="flex flex-col lg:flex-row justify-between gap-4">
@@ -19,6 +19,7 @@ export default function SearchSection() {
 
           <input
             type="text"
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Search lessons..."
             className="w-full pl-12 pr-4 py-3 rounded-xl bg-slate-800"
           />

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BiLock } from "react-icons/bi";
 
 export default function PremiumLessonCard() {
@@ -10,9 +11,9 @@ export default function PremiumLessonCard() {
           Premium Insight
         </h3>
 
-        <button className="mt-4 px-5 py-3 bg-indigo-500 rounded-lg">
+        <Link href={'/dashboard/plans/pricing'} className="mt-4 px-5 py-3 bg-indigo-500 rounded-lg">
           Upgrade to View
-        </button>
+        </Link>
       </div>
     </div>
   );

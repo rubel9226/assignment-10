@@ -10,39 +10,13 @@ import { useEffect, useState } from "react";
 import { api } from "@/lib/baseAPI";
 import { useUser } from "@/Components/layout/AuthContext";
 
-const lessons = [
-  {
-    id: 1,
-    category: "Health",
-    title: "The 1% Recovery Rule",
-    author: "S. Chen",
-    likes: "2.4k",
-  },
-  {
-    id: 2,
-    premium: true,
-  },
-  {
-    id: 3,
-    category: "Relationships",
-    title: "The Unsaid Contract",
-    author: "Marcus R.",
-    likes: "1.8k",
-  },
-  {
-    id: 4,
-    category: "Work",
-    title: "Post-AI Soft Skills",
-    author: "Jordan D.",
-    likes: "942",
-  },
-];
 
 export default function LessonsGallery() {
     const [allLessons, setAllLessons] = useState([]);
     const [loading, setLoading] = useState(true);
     const [pagination, setPagination] = useState({})
     const [currentPage, setCurrentPage] = useState(1);
+    const [search, setSearch] = useState('')
     const [filter, setFilter] = useState({
         sort: "latest",
         accessLevel: "",
@@ -57,7 +31,7 @@ export default function LessonsGallery() {
         try {
             console.log(token)
             setLoading(true);
-            const res = await api.get(`/lessons/all-lessons?page=${page}&limit=12&sort=${filter.sort}&accessLevel=${filter.accessLevel}&emotionalTone=${filter.emotionalTone}&category=${filter.category}`, {
+            const res = await api.get(`/lessons/all-lessons?page=${page}&limit=8&sort=${filter.sort}&accessLevel=${filter.accessLevel}&emotionalTone=${filter.emotionalTone}&category=${filter.category}&search=${search}`, {
                 headers: {
                     Authorization: `${token}`, 
                 }
@@ -75,14 +49,14 @@ export default function LessonsGallery() {
 
     useEffect(() => {
         handleGetAllLessons(currentPage);
-    }, [currentPage, filter]);
+    }, [currentPage, filter, search]);
 
     console.log(filter, 'all lesssons');
     
 
     return (
         <main className="container mx-auto px-4 py-8">
-            <SearchSection />
+            <SearchSection setSearch={setSearch} />
 
             <CategoryFilter filter={filter} setFilter={setFilter} />
 
@@ -119,8 +93,7 @@ export default function LessonsGallery() {
                 </section> 
             }
 
-            {
-                allLessons > 12 &&
+            { 
                 <Pagination
                     pagination={pagination}
                     currentPage={currentPage}
