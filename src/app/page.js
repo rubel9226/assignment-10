@@ -1,13 +1,12 @@
+
 import CTASection from "@/Components/home/CTASection";
-import StatsSection from "@/Components/home/StatsSection";
 import FeaturedLessons from "@/Components/home/FeaturedLessons";
 import HeroSection from "@/Components/home/HeroSection";
+import StatsSection from "@/Components/home/StatsSection";
 import TopContributors from "@/Components/home/TopContributors";
 import WhyLifeMatters from "@/Components/home/WhyLifeMatters";
 import Navbar from "@/Components/layout/Navbar";
-import Image from "next/image";
-import { authClient } from "@/lib/auth-client";
-import { api } from "@/lib/baseAPI";
+import { api } from "@/lib/baseAPI"; 
 
 export default async function Home() {
   let contributors = [];
@@ -19,11 +18,10 @@ export default async function Home() {
     featuredLessons = featuredRes?.data?.payload;
   } catch (error) {
     console.log(error);
-  }
-
-  console.log(featuredLessons, 'contributors');
+  } 
   return (
       <main>
+        <Navbar />
         <HeroSection />
         <StatsSection />
         <FeaturedLessons lessons={featuredLessons} />

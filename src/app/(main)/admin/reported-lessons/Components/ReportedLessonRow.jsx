@@ -9,6 +9,7 @@ import { useState } from "react";
 export default function ReportedLessonRow({ report, token, index }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false); 
+  const [loadingDelete, setLoadingDelete] = useState(false); 
 
 
   const handleDelete = async (id) => {
@@ -40,7 +41,7 @@ export default function ReportedLessonRow({ report, token, index }) {
     }
   };
 
-  const handleIgnore = async () => {
+  const handleIgnore = async (id) => {
     const result = await Swal.fire({
       title: "Ignore Reports?",
       text: 'All reports will be cleared.This lesson will be permanently removed.',
@@ -53,7 +54,19 @@ export default function ReportedLessonRow({ report, token, index }) {
     });
     
     if(!result?.isConfirmed)return; 
-
+    try {
+      setLoadingDelete(true)
+      await api.patch(`/admins/ignore-lesson/${id}`, {}, {
+        headers: {
+          Authorization: token.token,
+        }
+      });
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    } finally{
+      setLoadingDelete(false)
+    }
   };
 
   return (
@@ -89,16 +102,19 @@ export default function ReportedLessonRow({ report, token, index }) {
               className="btn btn-sm btn-error"
             >
             {
-              loading ? 'Please wait...' : 'Delete'
+              loading ? 'Deleting...' : 'Delete'
             }
               
             </button>
 
             <button
-              onClick={handleIgnore}
+              onClick={() => handleIgnore(report?._id)}
               className="btn btn-sm btn-success"
             >
-              Ignore
+              {
+                loadingDelete ? 'Ignoring...' : 'Ignore'
+              }
+              
             </button>
           </div>
         </td>

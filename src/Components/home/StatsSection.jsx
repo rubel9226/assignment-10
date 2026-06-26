@@ -1,4 +1,6 @@
-import GlassCard from "../ui/GlassCard";
+// import GlassCard from "../ui/GlassCard";
+
+import GlassCard from "@/Components/ui/GlassCard";
 
 const stats = [
   {
