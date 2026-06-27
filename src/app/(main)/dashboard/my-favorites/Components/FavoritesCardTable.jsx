@@ -42,10 +42,10 @@ export default function FavoritesCardTable({ lessons }) {
     if (!result.isConfirmed) return;
 
     try {
-      await api.patch(`/users/remove-favorite/${id}`,{
+      await api.patch(`/users/remove-favorite/${id}`, {},{
         headers: {
-          Authentication: token,
-        }
+          Authorization: token,
+      }
       });
 
       Swal.fire({

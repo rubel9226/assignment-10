@@ -32,11 +32,11 @@ export default function ManageLessonsFilters({filter, setFilter}) {
               }
               className="px-4 py-2 h-10 rounded-lg bg-slate-800 "
             >
-              <option value="latest">Latest</option>
-              <option value="oldest">Oldest</option>
-              <option value="views">Most Viewed</option>
-              <option value="likes">Most Liked</option>
-              <option value="comments">Most Commented</option>
+              <option value="latest">All Lessons</option> 
+              <option value="Reviewed">Reviewed Lessons</option>
+              <option value="Featured">Reatured Lessons</option>
+              <option value="Public">Public Lessons</option>
+              <option value="Private">Private Lessons</option>
             </select>
           </div>
       </div>

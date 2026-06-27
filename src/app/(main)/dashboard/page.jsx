@@ -10,6 +10,7 @@ import { headers } from "next/headers";
 export default async function DashboardHome() { 
     let stats = {};
     let lessons = [];
+    let weeklyChart = [];
     try {
         const token = await auth.api.getToken({
             headers: await headers ()
@@ -24,8 +25,14 @@ export default async function DashboardHome() {
              Authorization: token?.token,
            }
          });
+        const resChart = await api.get( "/users/weekly-chart", {
+           headers: {
+             Authorization: token?.token,
+           }
+         });
         stats = res?.data?.payload;
         lessons = resLessons?.data?.payload;
+        weeklyChart = resChart?.data?.payload;
     } catch (error) {
       console.log(error);  
     } 
@@ -35,7 +42,7 @@ export default async function DashboardHome() {
       <WelcomeBanner />
       <DashboardStats stats={stats} />
       <QuickActions />
-      <AnalyticsChart />
+      <AnalyticsChart data={weeklyChart} />
       <RecentLessons lessons={lessons} />
     </div>
   );

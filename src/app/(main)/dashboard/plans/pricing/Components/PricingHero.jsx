@@ -51,10 +51,12 @@ export default function PricingHero() {
                     </div> 
                 </div>
 
-                <button className="btn btn-warning btn-lg mt-10 rounded-full">
-                    <FaCrown size={20} />
-                    Upgrade to Premium
-                </button> 
+                <form action={'/api/subscription'} method='post'>
+                    <button className="btn btn-warning btn-lg mt-10 rounded-full">
+                        <FaCrown size={20} />
+                        Upgrade to Premium
+                    </button> 
+                </form>
             </div> 
         </section>
     );

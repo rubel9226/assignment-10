@@ -5,26 +5,7 @@ import FavoritesFilter from "./Components/FavoritesFilter";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
-export default async function MyFavoritesPage() {
-
-  // useEffect(() => {
-  //   loadFavorites();
-  // }, []);
-
-  // const loadFavorites = async () => {
-  //   try {
-  //     const res = await api.get(`/users/favorite-lessons?category=${category}&tone=${tone}`, {
-  //       headers: {
-  //           Authorization: token,
-  //       }
-  //     });
-
-  //     setLessons(res.data?.payload);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
+export default async function MyFavoritesPage() { 
 
   let lessons = [];
 
@@ -43,9 +24,7 @@ export default async function MyFavoritesPage() {
   }
   return (
     <div className="space-y-6 container mx-auto mt-4 min-h-[50vh]">
-      <FavoritesCardTable
-        lessons={lessons} 
-      />
+      <FavoritesCardTable lessons={lessons}  />
     </div>
   );
 }

@@ -54,42 +54,41 @@ export default function LessonCard({ user, lesson, token, allLessons, setAllLess
 
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-indigo-500/40 transition-all ">
+    <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-indigo-500/40 transition-all duration-300 flex flex-col h-full">
 
       {/* Cover */}
-      { lessonImage.startsWith("http") &&
-        <Link href={`/dashboard/lessons-details/${lesson._id}`} className="relative cursor-pointer">
-          <div className='h-52'>
-            {
-              lessonImage.startsWith("http") && 
-                <Image 
-                  src={lesson?.image}
-                  alt={lesson?.title ||  'lesson image'}
-                  fill    
-                  className="object-cover"
-                /> 
-            }
+      {lessonImage.startsWith("http") && (
+        <Link
+          href={`/dashboard/lessons-details/${lesson._id}`}
+          className="relative block h-52 overflow-hidden"
+        >
+          <Image
+            src={lesson.image}
+            alt={lesson.title || "lesson image"}
+            fill
+            className="object-cover hover:scale-105 transition-transform duration-300"
+          />
 
-          </div>
-
-
-
-          {lesson.accessLevel && lesson.accessLevel === "Premium" && (
+          {lesson.accessLevel === "Premium" && (
             <div className="absolute top-3 right-3 bg-amber-500 text-black px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
               <BiCrown />
-              Premium  
+              Premium
             </div>
           )}
         </Link>
-      }
+      )}
 
       {/* Content */}
-      <div className="p-5 pb-0"> 
+      <div className="p-5 flex flex-col flex-1">
 
-        <Link href={`/dashboard/lessons-details/${lesson._id}`} className=' cursor-pointer'>
+        <Link
+          href={`/dashboard/lessons-details/${lesson._id}`}
+          className="flex flex-col flex-1"
+        >
+          {/* Category */}
           <div className="flex justify-between items-center mb-3">
             <span className="text-xs bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full">
-              {lesson.category} 
+              {lesson.category}
             </span>
 
             <span className="text-xs text-slate-400">
@@ -97,67 +96,65 @@ export default function LessonCard({ user, lesson, token, allLessons, setAllLess
             </span>
           </div>
 
-          <h3 className="text-xl font-semibold mb-2 line-clamp-2">
+          {/* Title */}
+          <h3 className="text-xl font-semibold line-clamp-2 min-h-[56px]">
             {lesson.title}
           </h3>
 
-          <p className="text-slate-400 text-sm line-clamp-3 mb-4">
+          {/* Description */}
+          <p className="text-slate-400 text-sm line-clamp-3 mt-3 min-h-[60px]">
             {lesson.description}
           </p>
 
           {/* Creator */}
-          <div className='flex items-center justify-between mb-4'>
-            <div className="flex items-center gap-3">
-          {
-            userImage.startsWith("http") && 
-            <Image
-              src={ lesson?.creatorPhoto }
-              alt={lesson.creatorName}
-              width={36}
-              height={36}
-              className="rounded-full"
-            />
-          }
+          <div className="flex items-center gap-3 mt-5">
 
-          <div>
-            <p className="text-sm font-medium capitalize">
-              {lesson.creatorName}
-              
-            </p>
+            {userImage.startsWith("http") && (
+              <Image
+                src={lesson.creatorPhoto}
+                alt={lesson.creatorName}
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+            )}
 
-            <p className="text-xs text-slate-500">
-              {new Date(
-                lesson.createdAt
-              ).toLocaleDateString()}
-            </p>
-          </div>
+            <div>
+              <p className="text-sm font-medium capitalize">
+                {lesson.creatorName}
+              </p>
+
+              <p className="text-xs text-slate-500">
+                {new Date(lesson.createdAt).toLocaleDateString()}
+              </p>
             </div>
-              
-          </div>
 
+          </div>
         </Link>
 
-        {/* Stats */}
-        <div className="border-t border-slate-700 pt- flex items-center justify-between text-slate-400">
+        {/* Bottom Stats */}
+        <div className="mt-auto border-t border-slate-700 pt-4 flex justify-between items-center text-slate-400">
 
-          <div onClick={() => handleLike(lesson._id)} className="flex items-center gap-1 px-5 pb-5 
-          pt-4">
-            {
-              lesson.likes?.includes(user?.id) ? 
-              <FaHeart className="fill-red-500" /> : 
-                <BiHeart />
-            }
-            {lesson.likesCount}
-          </div>
+          <button
+            onClick={() => handleLike(lesson._id)}
+            className="flex items-center gap-2 hover:text-red-500 transition"
+          >
+            {lesson.likes?.includes(user?.id) ? (
+              <FaHeart className="fill-red-500" />
+            ) : (
+              <BiHeart />
+            )}
+            <span>{lesson.likesCount}</span>
+          </button>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <BiMessage />
-            {lesson.commentsCount}
+            <span>{lesson.commentsCount}</span>
           </div>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <BiShow />
-            {lesson.viewsCount} 
+            <span>{lesson.viewsCount}</span>
           </div>
 
         </div>

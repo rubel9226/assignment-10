@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CTASection() {
   return (
     <section className="py-24">
@@ -14,9 +16,9 @@ export default function CTASection() {
             lessons learned from real life experiences.
           </p>
 
-          <button className="mt-8 px-10 py-4 bg-white text-black rounded-xl font-semibold">
+          <Link href={'/dashboard/add-lessons'} className="mt-8 px-10 py-4 bg-white text-black rounded-xl font-semibold">
             Start Writing Today
-          </button>
+          </Link>
 
         </div>
 
