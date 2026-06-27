@@ -24,10 +24,7 @@ const RegisterForm = () => {
         const name = form.name.value;
         const email = form.email.value;
         const image = form.image.value;
-        const password = form.password.value;
-
-
-        console.log({name, email, image, password});
+        const password = form.password.value; 
 
 
         setLoading(true);
@@ -37,8 +34,7 @@ const RegisterForm = () => {
                 email: email,
                 password: password,
                 image: image
-            });
-            console.log(res);
+            }); 
 
             if (!res.error) {
                 router.push("/");
@@ -56,9 +52,7 @@ const RegisterForm = () => {
     const handleLoginGoogle =async () => {
         const {data, error} = await authClient.signIn.social({
             provider: 'google'
-        });
-        console.log(data, 'login success');
-        console.log(error, 'login field');
+        }); 
     };
 
 

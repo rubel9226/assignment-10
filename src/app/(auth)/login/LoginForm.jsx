@@ -16,9 +16,7 @@ const LoginForm = () => {
     const handleLoginGoogle =async () => {
         const {data, error} = await authClient.signIn.social({
             provider: 'google'
-        });
-        console.log(data, 'login success');
-        console.log(error, 'login field');
+        }); 
     };    
 
     const handleLogin = async (e) => {

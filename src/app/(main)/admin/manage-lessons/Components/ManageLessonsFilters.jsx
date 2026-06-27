@@ -1,5 +1,4 @@
 export default function ManageLessonsFilters({filter, setFilter}) {
-  console.log(filter, 'man')
   return (
     <div className="card bg-base-100 border border-base-300">
       <div className="card-body">
