@@ -44,8 +44,7 @@ export default function LessonCard({ user, lesson, token, allLessons, setAllLess
         );
         console.log(allLessons);
     } catch (error) {
-      console.log(error);
-      console.log(error?.response?.data?.message);
+      console.log(error); 
     }
   }
 

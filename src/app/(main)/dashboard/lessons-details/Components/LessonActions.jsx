@@ -20,8 +20,7 @@ export default function LessonActions({ lesson }) {
 
   const handleLike =async () => {
     setLoading(true);
-    const id = lesson._id;
-    console.log({id, token})
+    const id = lesson._id; 
     try {
       const res = await api.put(
             `/lessons/like-lesson/${id}`,
@@ -36,8 +35,7 @@ export default function LessonActions({ lesson }) {
         router.refresh();
 
     } catch (error) {
-      console.log(error);
-      console.log(error?.response?.data?.message);
+      console.log(error); 
     } finally {
       setLoading(false)
     }
@@ -47,8 +45,7 @@ export default function LessonActions({ lesson }) {
   
   const handleSaveLesson =async () => {
     setLoadingSave(true);
-    const id = lesson._id;
-    console.log({id, token})
+    const id = lesson._id; 
     try {
       const res = await api.put(
             `/lessons/save-unsave/${id}`,
@@ -58,13 +55,11 @@ export default function LessonActions({ lesson }) {
                 Authorization: token,
               },
             }
-        );
-        console.log(res?.data?.payload);
+        ); 
         router.refresh();
 
     } catch (error) {
-      console.log(error);
-      console.log(error?.response?.data?.message);
+      console.log(error); 
     } finally {
       setLoadingSave(false)
     }
