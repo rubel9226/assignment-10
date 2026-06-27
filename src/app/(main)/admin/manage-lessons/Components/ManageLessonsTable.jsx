@@ -65,8 +65,7 @@ export default function ManageLessonsTable({token}) {
     if(!result?.isConfirmed)return;
     
     try {
-      setLoadingFeature({loading: true, id});
-      console.log(token?.token)
+      setLoadingFeature({loading: true, id}); 
       await api.patch(`/admins/feature-lesson/${id}`, {}, {
         headers: {
           Authorization: token?.token
@@ -87,8 +86,7 @@ export default function ManageLessonsTable({token}) {
         title: "Error!",
         text: error?.response?.data?.message,
         icon: "error",
-      });
-      console.log(error?.response?.data?.message);
+      }); 
     } finally{
       setLoadingFeature({loading: false, id: ''});
     }
@@ -124,7 +122,7 @@ export default function ManageLessonsTable({token}) {
           showConfirmButton: false,
       });
     } catch (error) {
-      console.log(error);Swal.fire({
+      Swal.fire({
         title: "Error!",
         text: error?.response?.data?.message,
         icon: "error",
@@ -164,7 +162,7 @@ export default function ManageLessonsTable({token}) {
           showConfirmButton: false,
       });
     } catch (error) {
-      console.log(error);Swal.fire({
+      Swal.fire({
         title: "Error!",
         text: error?.response?.data?.message,
         icon: "error",

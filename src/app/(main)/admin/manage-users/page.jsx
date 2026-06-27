@@ -28,9 +28,7 @@ export default async function ManageUsersPage() {
         users = userRes?.data?.payload;
     } catch (error) {
         console.log(error);
-    }
-
-    console.log(usersStats, 'user state');
+    } 
 
     return (
         <div className="space-y-6 container mx-auto min-h-[50vh] mt-4 md:mt-8">
