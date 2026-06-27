@@ -13,22 +13,37 @@ import { toast } from 'react-toastify';
 
 const RegisterForm = () => {  
     const [showPassword, setShowPassword] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('')
     const router = useRouter();
 
     const [loading, setLoading] = useState(false);
 
-    const handleRegister = async (e) => {
-        e.preventDefault();
+    
 
+
+    const handleRegister = async (e) => {
+        e.preventDefault(); 
         const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
         const image = form.image.value;
-        const password = form.password.value; 
+        const password = form.password.value;
 
+        if(password.length < 6) {
+            setErrorMessage("Password must be at least 6 characters.");
+            return ;
+        }else if (!/[A-Z]/.test(password)) {
+            setErrorMessage("Password must contain at least one uppercase letter.");
+            return ;
+        }else if (!/[a-z]/.test(password)) {
+            setErrorMessage("Password must contain at least one lowercase letter.");
+            return ;
+        } else {
+            setErrorMessage('')
+        }
 
-        setLoading(true);
         try { 
+            setLoading(true);
             const res = await signUp.email({
                 name: name,
                 email: email,
@@ -55,6 +70,8 @@ const RegisterForm = () => {
         }); 
     };
 
+
+    console.log(errorMessage, 'error message');
 
     return (
         <div>
