@@ -1,9 +1,7 @@
-// import {
-//   Brain,
-//   Users,
-//   Sparkles,
-//   BadgeCheck,
-// } from "lucide-react";
+"use client";
+
+import { motion } from "motion/react";
+import { container, item } from "@/Components/ui/Motion";
 
 import { FaBrain, FaUserShield } from "react-icons/fa";
 import { HiBadgeCheck, HiSparkles } from "react-icons/hi";
@@ -37,10 +35,19 @@ const benefits = [
 
 export default function WhyLifeMatters() {
   return (
-    <section className="py-24 bg-slate-900/40">
+    <motion.section
+      variants={container}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="py-24 bg-slate-900/40"
+    >
       <div className="container mx-auto px-4">
-
-        <div className="text-center mb-16">
+        {/* Heading */}
+        <motion.div
+          variants={item}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl font-bold">
             Why Learning From Life Matters
           </h2>
@@ -48,34 +55,52 @@ export default function WhyLifeMatters() {
           <p className="text-slate-400 mt-4">
             Turn experiences into knowledge that lasts.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-4 gap-6">
-          {benefits.map((item) => {
-            const Icon = item.icon;
+        {/* Cards */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {benefits.map((benefit) => {
+            const Icon = benefit.icon;
 
             return (
-              <div
-                key={item.title}
-                className="bg-slate-900 border border-white/10 rounded-3xl p-6 text-center"
+              <motion.div
+                key={benefit.title}
+                variants={item}
+                whileHover={{
+                  y: -10,
+                  scale: 1.04,
+                }}
+                transition={{
+                  duration: 0.25,
+                }}
+                className="bg-slate-900 border border-white/10 rounded-3xl p-6 text-center cursor-pointer"
               >
-                <div className="w-16 h-16 rounded-2xl bg-indigo-500/10 flex items-center justify-center mx-auto">
-                  <Icon className="text-indigo-400" />
-                </div>
+                {/* Icon */}
+                <motion.div
+                  whileHover={{
+                    rotate: 10,
+                    scale: 1.2,
+                  }}
+                  transition={{
+                    duration: 0.3,
+                  }}
+                  className="w-16 h-16 rounded-2xl bg-indigo-500/10 flex items-center justify-center mx-auto"
+                >
+                  <Icon className="text-3xl text-indigo-400" />
+                </motion.div>
 
                 <h3 className="mt-6 text-xl font-semibold">
-                  {item.title}
+                  {benefit.title}
                 </h3>
 
                 <p className="text-slate-400 mt-3">
-                  {item.description}
+                  {benefit.description}
                 </p>
-              </div>
+              </motion.div>
             );
           })}
         </div>
-
       </div>
-    </section>
+    </motion.section>
   );
 }

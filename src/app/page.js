@@ -4,6 +4,7 @@ import FeaturedLessons from "@/Components/home/FeaturedLessons";
 import HeroSection from "@/Components/home/HeroSection";
 import StatsSection from "@/Components/home/StatsSection";
 import TopContributors from "@/Components/home/TopContributors";
+import WhyLearning from "@/Components/home/WhyLearning";
 import WhyLifeMatters from "@/Components/home/WhyLifeMatters";
 import Navbar from "@/Components/layout/Navbar";
 import { api } from "@/lib/baseAPI"; 
@@ -24,6 +25,7 @@ export default async function Home() {
         <Navbar />
         <HeroSection />
         <StatsSection />
+        {/* <WhyLearning /> */}
         <FeaturedLessons lessons={featuredLessons} />
         <WhyLifeMatters />
         <TopContributors contributors={contributors} />

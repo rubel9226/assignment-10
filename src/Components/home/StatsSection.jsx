@@ -1,6 +1,8 @@
-// import GlassCard from "../ui/GlassCard";
+"use client";
 
+import { motion } from "motion/react";
 import GlassCard from "@/Components/ui/GlassCard";
+import { container, item } from "@/Components/ui/Motion";
 
 const stats = [
   {
@@ -23,23 +25,32 @@ const stats = [
 
 export default function StatsSection() {
   return (
-    <section className="-mt-16 relative z-10 container mx-auto px-4">
+    <motion.section
+      variants={container}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="-mt-16 relative z-10 container mx-auto px-4"
+    >
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {stats.map((item) => (
-          <GlassCard
-            key={item.label}
-            className="p-6 text-center"
+        {stats.map((stat) => (
+          <motion.div
+            key={stat.label}
+            variants={item}
+            whileHover={{ scale: 1.05, y: -5 }}
           >
-            <h3 className="text-3xl font-bold text-indigo-300">
-              {item.value}
-            </h3>
+            <GlassCard className="p-6 text-center">
+              <h3 className="text-3xl font-bold text-indigo-300">
+                {stat.value}
+              </h3>
 
-            <p className="text-sm text-slate-400">
-              {item.label}
-            </p>
-          </GlassCard>
+              <p className="text-sm text-slate-400">
+                {stat.label}
+              </p>
+            </GlassCard>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }

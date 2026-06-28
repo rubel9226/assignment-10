@@ -1,33 +1,20 @@
+"use client";
+
+import { motion } from "motion/react";
+import { container, item } from "@/Components/ui/Motion";
+
 import Image from "next/image";
 import Link from "next/link";
 
-// const lessons = [
-//   {
-//     id: 1,
-//     title: "The Stoic Executive",
-//     category: "Leadership",
-//     image: "/images/lesson-1.jpg",
-//     author: "Marcus Aurelius Jr.",
-//   },
-//   {
-//     id: 2,
-//     title: "Digital Minimalism",
-//     category: "Efficiency",
-//     image: "/images/lesson-2.jpg",
-//     author: "Sarah Chen",
-//   },
-//   {
-//     id: 3,
-//     title: "Human Agency in the AI Age",
-//     category: "AI Ethics",
-//     image: "/images/lesson-3.jpg",
-//     author: "David Miller",
-//   },
-// ];
-
-export default function FeaturedLessons({lessons}) {
+export default function FeaturedLessons({ lessons }) {
   return (
-    <section className="container mx-auto px-4 py-24">
+    <motion.section
+      variants={container}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className="container mx-auto px-4 py-24"
+    >
       <div className="mb-12">
         <h2 className="text-4xl font-bold">
           Curated Insights
@@ -38,47 +25,62 @@ export default function FeaturedLessons({lessons}) {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {lessons.map((lesson) => (
-          <div
+          <motion.div
             key={lesson._id}
-            className="bg-slate-900 border border-white/10 rounded-3xl overflow-hidden hover:-translate-y-2 transition"
+            variants={item}
+            whileHover={{
+              y: -10,
+              scale: 1.03,
+            }}
+            transition={{ duration: 0.25 }}
+            className="bg-slate-900 border border-white/10 rounded-3xl overflow-hidden"
           >
-            <div className="relative h-56">
-              <Image
-                src={lesson?.image}
-                alt={lesson?.title}
-                fill
-                className="object-cover"
-              />
+            <div className="relative h-56 overflow-hidden">
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.4 }}
+                className="w-full h-full"
+              >
+                <Image
+                  src={lesson.image}
+                  alt={lesson.title}
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
             </div>
 
             <div className="p-6">
-              <span className="text-indigo-400 text-sm">
-                {lesson?.category}
+              <span className="text-indigo-400 text-sm whitespace-nowrap">
+                {lesson.category}
               </span>
 
-              <h3 className="text-xl font-semibold mt-3">
-                {lesson?.title?.slice(0, 30)}...
+              <h3 className="text-xl font-semibold mt-3 truncate">
+                {lesson.title}
               </h3>
 
-              <p className="text-slate-400 mt-3">
-                {lesson?.description?.slice(0, 60)}...
+              <p className="text-slate-400 mt-3 truncate">
+                {lesson.description.slice(0, 60)}...
               </p>
 
               <div className="mt-6 flex items-center justify-between">
-                <span className="text-sm text-slate-500">
-                  {lesson?.creatorName}
+                <span className="text-sm text-slate-500 truncate">
+                  {lesson.creatorName}
                 </span>
 
-                <Link href={`/dashboard/lessons-details/${lesson?._id}`} className="text-indigo-400 whitespace-nowrap cursor-pointer">
+                <Link
+                  href={`/dashboard/lessons-details/${lesson._id}`}
+                  className="text-indigo-400 whitespace-nowrap"
+                >
                   Read More →
                 </Link>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }
